@@ -1,83 +1,83 @@
 body, input, button {
-    color: #636363;
+	color: #636363;
 }
 
 form {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 5px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    width: 640px;    
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	width: 640px;	
 }
 
 fieldset {
-    margin-bottom: 10px;
-    margin-right: 0px;
-    margin-left: 0px;
-    margin-top: 10px;
-    padding-top: 5px;
-    padding-left: 15px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #e4e4e4;    
+	margin-bottom: 10px;
+	margin-right: 0px;
+	margin-left: 0px;
+	margin-top: 10px;
+	padding-top: 5px;
+	padding-left: 15px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #e4e4e4;	
 }
 
 legend {
-    padding-right: 10px;
-    padding-left: 5px;
-    margin-bottom: 5px;
-    color: #00a88e;
+	padding-right: 10px;
+	padding-left: 5px;
+	margin-bottom: 5px;
+	color: #00a88e;
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    min-height: 24px;
+	display: block;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	min-height: 24px;
 }
 
 label > span {
-    display: inline-block;
-    margin-top: 3px;
-    vertical-align: top;
-    width: 130px;
+	display: inline-block;
+	margin-top: 3px;
+	vertical-align: top;
+	width: 130px;
 }
 
 input[type=text] {
-    width: 470px;
-    box-sizing: border-box;
+	width: 470px;
+	box-sizing: border-box;
 }
 
 button {
-    color: white;
-    float: right;
-    border-style: none;
-    background-color: #00a88e;
-    outline-color: #00a88e;
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 10px;
+	color: white;
+	float: right;
+	border-style: none;
+	background-color: #00a88e;
+	outline-color: #00a88e;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 10px;
 }
 
 button:hover {
-    background-color: #0cc1a5;
+	background-color: #0cc1a5;
 }
 
 button:active {
-    background-color: #00a88e;
+	background-color: #00a88e;
 }
 
 form::after {
-    clear: right;
-    display: block;
-    content:'';
+	clear: right;
+	display: block;
+	content:'';
 }
 
 footer {
-    margin-top: 100px;
-    margin-right: 50px;
-    text-align: right;
+	margin-top: 100px;
+	margin-right: 50px;
+	text-align: right;
 }
