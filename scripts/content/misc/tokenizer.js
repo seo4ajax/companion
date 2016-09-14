@@ -5,18 +5,17 @@ var tokenizer = (() => {
 
 	const REMOVED_ELEMENTS_CSS_SELECTOR = "script, style";
 	const REMOVED_NODES_XPATH_SELECTOR = "//comment()";
-	const HTML_MIME_TYPE = "text/html";
 
 	return Object.freeze({
 		getTokens
 	});
 
-	function getTokens(content, mimeType = HTML_MIME_TYPE) {
-		return new Set(getTextContent(content, mimeType).split(/\s+/).filter(token => token));
+	function getTokens(content) {
+		return new Set(getTextContent(content).split(/\s+/).filter(token => token));
 	}
 
-	function getTextContent(content, mimeType) {
-		const doc = getDocument(content, mimeType);
+	function getTextContent(content) {
+		const doc = getDocument(content);
 		doc.documentElement.querySelectorAll(REMOVED_ELEMENTS_CSS_SELECTOR).forEach(script => script.remove());
 		const iterator = doc.evaluate(REMOVED_NODES_XPATH_SELECTOR, doc);
 		const comments = [];
@@ -27,9 +26,10 @@ var tokenizer = (() => {
 		return doc.documentElement.textContent.trim();
 	}
 
-	function getDocument(content, mimeType) {
-		const domParser = new window.DOMParser();
-		const doc = domParser.parseFromString(content, mimeType);
+	function getDocument(content) {
+		const doc = document.implementation.createHTMLDocument();
+		doc.write(content);
+		doc.close();
 		return doc;
 	}
 

@@ -41,8 +41,8 @@ var webpage = (() => {
 
 	function getContentTokens(url) {
 		return window.fetch(url, { credentials: FETCH_CREDENTIALS_INCLUDE })
-			.then(response => response.status >= ERROR_HTTP_CODE ? Promise.reject() : Promise.all([response.text(), response.headers.get("content-type")]))
-			.then(([text, mimeType]) => tokenizer.getTokens(text, mimeType));
+			.then(response => response.status >= ERROR_HTTP_CODE ? Promise.reject() : response.text())
+			.then(text => tokenizer.getTokens(text));
 	}
 
 	function getEscapedSearch() {
