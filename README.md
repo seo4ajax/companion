@@ -36,6 +36,8 @@ This indicates that the page is correctly implementing the Google Ajax Scheme sp
 - If the displayed page content is complete, this could mean there is no need to implement the Google Ajax Scheme specification.
 - If the display page is partially rendered or empty then it probably means the server is not able to provide the snapshot of the page. You can also check that the user-agent is not blocked by the server and change it if needed in the options page.
 
+The orange color may also mean that there was an HTTP error (e.g. 4xx or 5xx status code) during the download of the snapshot.
+
 ### The extension doesn't work
 
 Please contact us at team@seo4ajax.com. We will do our best to fix your issue.
