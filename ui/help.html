@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="help.css">
+	<title>Get started with SEO4Ajax Companion</title>
+	<meta charset="utf-8">	
+</head>
+
+<body>
+	<header>
+		<a href="https://www.seo4ajax.com" class="logo-link">
+			<img class="logo" alt="SEO4Ajax Companion" src="images/logo-seoa4ajax.png">
+			<span class="logo-text">Companion</span>
+		</a>
+	</header>
+	<main>
+		<h1 class="welcome-message" hidden>You have successfully installed SEO4Ajax Companion!</h1>
+		<h2>How to use the extension</h2>
+		<ul>
+			<li>
+				Open the URL of any website implementing the <a href="https://developers.google.com/webmasters/ajax-crawling/docs/learn-more"
+					target="_blank">Google Ajax Scheme</a> specification.
+			</li>
+			<li>
+				The extension checks that the website is respecting the specification and appends the query parameter
+				<code>_escaped_fragment_=</code> to the URL if so.
+			</li>
+			<li>
+				The extension disables JavaScript so you can preview exactly what compliant bots see, in your browser.
+			</li>
+			<li>
+				The color of the extension icon turns to green <img src="/icons/icon-38-ok.png" class="icon"> meaning the snapshot of
+				the page has been properly served.
+			</li>
+		</ul>
+
+		<h2>Notes</h2>
+		<ul>
+			<li>
+				You can have an overview on how bots are crawling the website by navigating through its inner links. During the navigation,
+				the extension will append automatically the <code>_escaped_fragment_=</code> query parameter and the icon status
+				will be updated.
+			</li>
+			<li>
+				Click on the icon to enable/disable the extension. When disabled, the extension icon stays gray <img src="/icons/icon-38-default.png"
+					class="icon"> and a badge labelled "off" is displayed above the icon.
+			</li>
+			<li>
+				Go to the <a href="options.html" target="_blank">options page</a> (via the contextual menu of extension icon) to set
+				the user-agent used when downloading snapshots.
+			</li>
+			<li>
+				When enabled, the color of the extension icon will be gray <img src="/icons/icon-38-default.png" class="icon"> if the
+				extension is not active (e.g. on chrome://* pages).
+			</li>
+			<li>
+				You can display the current help page by clicking on the link "Display the help page" on the bottom right of the
+				<a href="options.html" target="_blank">options page</a>.
+			</li>
+		</ul>
+
+		<h2>Troubleshooting</h2>
+		<h3>The extension doesn't append the <code>_escaped_fragment_=</code> query parameter to the URL. The color of the extension
+			icon stays black <img src="/icons/icon-38.png" class="icon">.</h3>
+		<p>The cause can vary depending on how the website implements the Google Ajax Scheme specification:</p>
+		<ul>
+			<li>
+				If the website is using the
+				<a href="https://developer.mozilla.org/en/docs/Web/API/History" target="_blank">History API</a> to handle navigation,
+				then make sure that the <code>&lt;meta name="fragment" content="!"&gt;</code> is present in the
+				<code>&lt;head&gt;</code> of the page.
+			</li>
+			<li>
+				If the website is relying on the
+				<a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax" target="_blank">fragment identifier</a> to
+				handle navigation, then make sure that fragments begin with #! (e.g. #!home instead of #home).
+			</li>
+		</ul>
+		<h3>Instead of being green, the color of the extension icon is orange <img src="/icons/icon-38-warning.png" class="icon"> or
+			red <img src="/icons/icon-38-error.png" class="icon">.</h3>
+		<p>
+			This indicates that the page is correctly implementing the Google Ajax Scheme specification but the snapshot content is almost
+			identical (orange) or identical (red) to the page served without the <code>_escaped_fragment_=</code> parameter. The orange color
+			may also mean that there was an HTTP error (e.g. 4xx or 5xx status code) during the download of the snapshot.
+		</p>
+		<ul>
+			<li>
+				If the displayed page content is complete, this could mean there is no need to implement the Google Ajax Scheme specification.
+			</li>
+			<li>
+				If the display page is partially rendered or empty then it probably means the server is not able to provide the snapshot
+				of the page. You can also check that the user-agent is not blocked by the server and change it if needed in the
+				<a href="options.html" target="_blank">options page</a>.
+			</li>
+		</ul>
+		<h3>The extension doesn't work</h3>
+		<p>
+			Please contact us at team@seo4ajax.com. We will do our best to fix your issue.
+		</p>
+
+	</main>
+
+	<script src="/scripts/configuration.js"></script>
+	<script src="/scripts/help/index.js"></script>
+</body>
+
+</html>

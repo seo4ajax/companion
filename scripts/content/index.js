@@ -1,0 +1,4 @@
+/* global business */
+
+
+business.init();
