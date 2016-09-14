@@ -37,7 +37,7 @@ var netfilters = (() => {
 		return details => {
 			headers.forEach(updateHeader(type, details));
 			details[type] = details[type].filter(detailsHeader => {
-				const foundHeader = headers.find(header => header.name.toLowerCase() == detailsHeader.name.toLowerCase());
+				const foundHeader = headers.find(header => equalsHeaderName(detailsHeader, header));
 				return !foundHeader || foundHeader.value !== undefined;
 			});
 			return { [type]: details[type] };
@@ -46,7 +46,7 @@ var netfilters = (() => {
 
 	function updateHeader(type, details) {
 		return header => {
-			const foundHeader = details[type].find(detailsHeader => detailsHeader.name.toLowerCase() == header.name.toLowerCase());
+			const foundHeader = details[type].find(detailsHeader => equalsHeaderName(detailsHeader, header));
 			if (header.value !== undefined) {
 				if (foundHeader) {
 					foundHeader.value = header.replaced ? foundHeader.value.replace(header.replaced, header.value) : header.value;
@@ -55,6 +55,10 @@ var netfilters = (() => {
 				}
 			}
 		};
+	}
+
+	function equalsHeaderName(header, otherHeader) {
+		return header.name.toLowerCase() == otherHeader.name.toLowerCase();
 	}
 
 })();
