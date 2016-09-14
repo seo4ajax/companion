@@ -26,7 +26,7 @@ You can install SEO4Ajax Companion through the [Chrome web store](https://chrome
 
 The cause can vary depending on how the website implements the Google Ajax Scheme specification:
 
-- If the website is using the [History API](https://developer.mozilla.org/en/docs/Web/API/History) to handle navigation, then make sure that the `<meta name="fragment" content="!">` is present in the `<head>` of the page.
+- If the website is using the [History API](https://developer.mozilla.org/en/docs/Web/API/History) to handle navigation, then make sure that the `<meta name="fragment" content="!">` tag is present in the `<head>` of the page.
 - If the website is relying on the [fragment identifier](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier#Syntax) to handle navigation, then make sure that fragments begin with #! (e.g. #!home instead of #home).
 
 ### Instead of being green, the color of the extension icon is orange ![alt text](/icons/icon-16-warning.png) or red ![alt text](/icons/icon-16-error.png).
