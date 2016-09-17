@@ -1,7 +1,6 @@
-/* global configuration, minhash, tokenizer, url */
+/* global app */
 
-/* exported webpage */
-var webpage = (() => {
+app.webpage = (window, document, configuration, minhash, tokenizer, url) => {
 
 	const HASHCHANGE_EVENT = "hashchange";
 	const DOM_CONTENT_LOADED_EVENT = "DOMContentLoaded";
@@ -72,7 +71,7 @@ var webpage = (() => {
 	}
 
 	function getMutationObserver(onMetaFragmentFound) {
-		const observer = new MutationObserver(mutations => mutations.forEach(mutation => {
+		const observer = new window.MutationObserver(mutations => mutations.forEach(mutation => {
 			if (findMetaFragment(mutation.addedNodes)) {
 				observer.disconnect();
 				onMetaFragmentFound();
@@ -85,4 +84,4 @@ var webpage = (() => {
 		return Array.from(nodes).find(node => node.matches && node.matches(META_FRAGMENT_SELECTOR));
 	}
 
-})();
+};

@@ -1,7 +1,6 @@
-/* global chrome */
+/* global app */
 
-/* exported welcome */
-var welcome = (() => {
+app.welcome = runtime => {
 
 	const INSTALL_REASON = "install";
 
@@ -10,11 +9,11 @@ var welcome = (() => {
 	});
 
 	function onInstalled(listener) {
-		chrome.runtime.onInstalled.addListener(details => {
+		runtime.onInstalled.addListener(details => {
 			if (details.reason == INSTALL_REASON) {
 				listener();
 			}
 		});
 	}
 
-})();
+};

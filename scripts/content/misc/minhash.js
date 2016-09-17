@@ -1,7 +1,6 @@
+/* global app */
 
-
-/* exported minhash */
-var minhash = (() => {
+app.misc.minhash = () => {
 
     const RANDOM_MAX = 11;
     const HASH_MASK = 131071;
@@ -90,4 +89,4 @@ var minhash = (() => {
         }
     }
 
-})();
+};

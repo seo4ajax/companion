@@ -1,7 +1,6 @@
-/* global chrome */
+/* global app */
 
-/* exported bgpage */
-var bgpage = (() => {
+app.bgpage = (window, document, runtime) => {
 
 	const FOCUS_EVENT = "focus";
 	const INIT_MESSAGE = { init: true };
@@ -30,7 +29,7 @@ var bgpage = (() => {
 	}
 
 	function sendMessage(message) {
-		focusPromise.then(() => chrome.runtime.sendMessage(message));
+		focusPromise.then(() => runtime.sendMessage(message));
 	}
 
-})();
+};

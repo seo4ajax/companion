@@ -1,7 +1,6 @@
-/* global configuration, tabs, network */
+/* global app */
 
-/* exported business */
-var business = (() => {
+app.business = (configuration, tabs, network) => {
 
 	return Object.freeze({
 		init,
@@ -31,4 +30,4 @@ var business = (() => {
 		return config;
 	}
 
-})();
+};

@@ -1,7 +1,6 @@
-/* global chrome, configuration, tabs */
+/* global app */
 
-/* exported ui */
-var ui = (() => {
+app.ui = (browserAction, configuration, tabs) => {
 
 	const WELCOME_QUERY_PARAM = "?welcome";
 
@@ -13,13 +12,13 @@ var ui = (() => {
 	});
 
 	function refreshBadge(config) {
-		chrome.browserAction.setBadgeText({ text: config.enabled ? configuration.BADGE_ON_LABEL : configuration.BADGE_OFF_LABEL });
-		chrome.browserAction.setBadgeBackgroundColor({ color: config.enabled ? configuration.BADGE_ON_COLOR : configuration.BADGE_OFF_COLOR });
+		browserAction.setBadgeText({ text: config.enabled ? configuration.BADGE_ON_LABEL : configuration.BADGE_OFF_LABEL });
+		browserAction.setBadgeBackgroundColor({ color: config.enabled ? configuration.BADGE_ON_COLOR : configuration.BADGE_OFF_COLOR });
 	}
 
 	function refreshIcon(tabId, pageInfo) {
 		const slug = pageInfo && pageInfo.probabilityEscapedOK === undefined ? "" : configuration.ICON_PATH_SEPARATOR + getIconSlug(pageInfo.probabilityEscapedOK);
-		chrome.browserAction.setIcon({ path: configuration.ICON_PATH_PREFIX + slug + configuration.ICON_PATH_SUFFIX, tabId });
+		browserAction.setIcon({ path: configuration.ICON_PATH_PREFIX + slug + configuration.ICON_PATH_SUFFIX, tabId });
 	}
 
 	function displayHelp() {
@@ -27,7 +26,7 @@ var ui = (() => {
 	}
 
 	function onButtonClick(buttonClickListener) {
-		chrome.browserAction.onClicked.addListener(buttonClickListener);
+		browserAction.onClicked.addListener(buttonClickListener);
 	}
 
 	function getIconSlug(probabilityEscapedOK) {
@@ -40,4 +39,4 @@ var ui = (() => {
 		}
 	}
 
-})();
+};

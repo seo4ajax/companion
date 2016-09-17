@@ -1,7 +1,6 @@
-/* global chrome */
+/* global app */
 
-/* exported netfilters */
-var netfilters = (() => {
+app.misc.netfilters = webRequest => {
 
 	const BLOCKING_OPTION = "blocking";
 	const REQUEST_HEADERS_TYPE = "requestHeaders";
@@ -24,13 +23,13 @@ var netfilters = (() => {
 	}
 
 	function enable() {
-		chrome.webRequest.onBeforeSendHeaders.addListener(upsertRequestHeaders, filterRules.request.filter, REQUEST_OPTIONS);
-		chrome.webRequest.onHeadersReceived.addListener(upsertResponseHeaders, filterRules.response.filter, RESPONSE_OPTIONS);
+		webRequest.onBeforeSendHeaders.addListener(upsertRequestHeaders, filterRules.request.filter, REQUEST_OPTIONS);
+		webRequest.onHeadersReceived.addListener(upsertResponseHeaders, filterRules.response.filter, RESPONSE_OPTIONS);
 	}
 
 	function disable() {
-		chrome.webRequest.onBeforeSendHeaders.removeListener(upsertRequestHeaders);
-		chrome.webRequest.onHeadersReceived.removeListener(upsertResponseHeaders);
+		webRequest.onBeforeSendHeaders.removeListener(upsertRequestHeaders);
+		webRequest.onHeadersReceived.removeListener(upsertResponseHeaders);
 	}
 
 	function updateHeaders(type, headers) {
@@ -61,4 +60,4 @@ var netfilters = (() => {
 		return header.name.toLowerCase() == otherHeader.name.toLowerCase();
 	}
 
-})();
+};

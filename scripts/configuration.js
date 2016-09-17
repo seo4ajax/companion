@@ -1,7 +1,6 @@
-/* global chrome */
+const app = { misc: {} };
 
-/* exported configuration */
-var configuration = (() => {
+app.configuration = storage => {
 
 	const ENABLED_STORAGE_KEY = "configuration.enabled";
 	const USER_AGENT_STORAGE_KEY = "configuration.userAgent";
@@ -41,15 +40,15 @@ var configuration = (() => {
 	});
 
 	function get() {
-		return new Promise(resolve => chrome.storage.local.get(STORAGE_KEYS, items => resolve(mapItems(items))));
+		return new Promise(resolve => storage.local.get(STORAGE_KEYS, items => resolve(mapItems(items))));
 	}
 
 	function set(config) {
-		return new Promise(resolve => chrome.storage.local.set(mapConfig(config), () => resolve(config)));
+		return new Promise(resolve => storage.local.set(mapConfig(config), () => resolve(config)));
 	}
 
 	function onChange(listener) {
-		chrome.storage.onChanged.addListener(changes => listener(mapItems(changes)));
+		storage.onChanged.addListener(changes => listener(mapItems(changes)));
 	}
 
 	function mapConfig(config) {
@@ -61,8 +60,8 @@ var configuration = (() => {
 
 	function mapItems(items) {
 		return {
-			enabled: items[ENABLED_STORAGE_KEY] !== undefined ? items[ENABLED_STORAGE_KEY] : configuration.CONFIG_ENABLED_DEFAULT,
-			userAgent: items[USER_AGENT_STORAGE_KEY] || configuration.CONFIG_USER_AGENT_DEFAULT
+			enabled: items[ENABLED_STORAGE_KEY] !== undefined ? items[ENABLED_STORAGE_KEY] : app.configuration.CONFIG_ENABLED_DEFAULT,
+			userAgent: items[USER_AGENT_STORAGE_KEY] || app.configuration.CONFIG_USER_AGENT_DEFAULT
 		};
 	}
 
@@ -72,4 +71,4 @@ var configuration = (() => {
 		}
 	}
 
-})();
+};

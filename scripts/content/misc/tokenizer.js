@@ -1,7 +1,6 @@
+/* global app */
 
-
-/* exported tokenizer */
-var tokenizer = (() => {
+app.misc.tokenizer = document => {
 
 	const REMOVED_ELEMENTS_CSS_SELECTOR = "script, style";
 	const REMOVED_NODES_XPATH_SELECTOR = "//comment()";
@@ -33,4 +32,4 @@ var tokenizer = (() => {
 		return doc;
 	}
 
-})();
+};

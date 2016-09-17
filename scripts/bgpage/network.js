@@ -1,7 +1,6 @@
-/* global configuration, netfilters */
+/* global app */
 
-/* exported network */
-var network = (() => {
+app.network = (configuration, netfilters) => {
 
 	const REFERER_HEADER_NAME = "referer";
 	const USER_AGENT_HEADER_NAME = "user-agent";
@@ -48,4 +47,4 @@ var network = (() => {
 		};
 	}
 
-})();
+};

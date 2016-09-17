@@ -1,7 +1,6 @@
-/* global configuration, webpage, bgpage */
+/* global app */
 
-/* exported business */
-var business = (() => {
+app.business = (console, configuration, webpage, bgpage) => {
 
 	return Object.freeze({
 		init
@@ -42,4 +41,4 @@ var business = (() => {
 		}
 	}
 
-})();
+};

@@ -1,7 +1,6 @@
-/* global configuration */
+/* global app */
 
-/* exported url */
-var url = (() => {
+app.url = (document, location, history, configuration) => {
 
 	const HASHBANG_TEST = new RegExp(`^${configuration.HASHBANG}`);
 	const ESCAPED_REPLACE = new RegExp(`(^\\${configuration.ESCAPED_FRAGMENT_FIRST_PARAM}|${configuration.ESCAPED_FRAGMENT_LAST_PARAM}.*$)`);
@@ -91,4 +90,4 @@ var url = (() => {
 		return escapedHash;
 	}
 
-})();
+};
