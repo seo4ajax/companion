@@ -7,7 +7,7 @@ app.ui = (browserAction, configuration, tabs) => {
 	return Object.freeze({
 		refreshBadge,
 		refreshIcon,
-		displayHelp,
+		displayWelcomePage,
 		onButtonClick
 	});
 
@@ -21,7 +21,7 @@ app.ui = (browserAction, configuration, tabs) => {
 		browserAction.setIcon({ path: configuration.ICON_PATH_PREFIX + slug + configuration.ICON_PATH_SUFFIX, tabId });
 	}
 
-	function displayHelp() {
+	function displayWelcomePage() {
 		tabs.create(configuration.HELP_PAGE_PATH + WELCOME_QUERY_PARAM);
 	}
 

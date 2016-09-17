@@ -14,7 +14,7 @@
 	})();
 
 	window.init = business.init;
-	welcome.onInstalled(ui.displayHelp);
+	welcome.onInstalled(ui.displayWelcomePage);
 	business.init();
 	business.getConfiguration().then(ui.refreshBadge);
 	business.onUpdate(ui.refreshIcon);
