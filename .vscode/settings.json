@@ -4,8 +4,9 @@
 	"jshint.enable": true,
 	"jshint.options": {
 		"esnext": true,
-		"browser": true,
-		"elision": true
+		"elision": true,
+		"undef": true,
+		"unused": true
 	},
 	"htmlhint.options": {
 		"tag-self-close": false,
