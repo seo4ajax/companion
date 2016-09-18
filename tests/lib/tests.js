@@ -59,7 +59,7 @@
 		return () => {
 			const doc = iframe.contentDocument;
 			doc.title = scriptPath;
-			appendStylesheet(doc.head, STYLESHEET_PATH);
+			appendStylesheet(doc.head, STYLESHEET_PATH + "?" + scriptPath);
 			const body = doc.body;
 			appendScript(body, `${SCRIPTS_PATH}/${scriptPath}`);
 			appendScript(body, `${TESTS_PATH}/${scriptPath}`);
