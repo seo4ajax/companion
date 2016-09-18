@@ -38,14 +38,14 @@
 		}
 	}
 
-	function appendTest(groupContainer, scriptPath) {
+	function appendTest(parent, scriptPath) {
 		const template = document.getElementById(TEMPLATE_ID).cloneNode(true);
 		const link = template.querySelector("a");
 		template.removeAttribute("id");
 		link.textContent = scriptPath;
 		link.href = `#${scriptPath}`;
 		appendIframe(template, scriptPath);
-		groupContainer.appendChild(template);
+		parent.appendChild(template);
 	}
 
 	function appendIframe(parent, scriptPath) {
