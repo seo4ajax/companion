@@ -25,6 +25,7 @@ QUnit.module("ui", {
 });
 
 QUnit.test("refreshBadge(details)", assert => {
+	assert.expect(3);
 	browserAction.setBadgeText = details => {
 		assert.equal(typeof details.text, "string", "browserAction.setBadgeText: details.text is a string");
 	};
@@ -36,6 +37,7 @@ QUnit.test("refreshBadge(details)", assert => {
 });
 
 QUnit.test("refreshIcon(tabId, details)", assert => {
+	assert.expect(2);
 	browserAction.setIcon = details => {
 		assert.equal(typeof details.path, "string", "browserAction.setIcon: details.path is a string");
 	};
@@ -44,6 +46,7 @@ QUnit.test("refreshIcon(tabId, details)", assert => {
 });
 
 QUnit.test("displayWelcomePage()", assert => {
+	assert.expect(2);
 	tabs.create = url => {
 		assert.equal(typeof url, "string", "tabs.create: url is a string");
 	};
@@ -52,6 +55,7 @@ QUnit.test("displayWelcomePage()", assert => {
 });
 
 QUnit.test("onButtonClick(listener)", assert => {
+	assert.expect(2);
 	browserAction.onClicked = {
 		addListener: listener => {
 			assert.equal(typeof listener, "function", "browserAction.onClicked.addListener: listener is a function");

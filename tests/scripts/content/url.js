@@ -24,6 +24,7 @@ QUnit.module("url", {
 });
 
 QUnit.test("href", assert => {
+	assert.expect(1);
 	const TEST_VALUE = "42";
 	loc.href = TEST_VALUE;
 	url = app.url(doc, loc, hist, configuration);
@@ -31,46 +32,55 @@ QUnit.test("href", assert => {
 });
 
 QUnit.test("isHashBang()", assert => {
+	assert.expect(1);
 	assert.equal(url.isHashBang(), false, "isHashBang() is false");
 });
 
 QUnit.test("isHashBang()", assert => {
+	assert.expect(1);
 	loc.hash = "#!test";
 	assert.equal(url.isHashBang(), true, "isHashBang() is true");
 });
 
 QUnit.test("isEscaped()", assert => {
+	assert.expect(1);
 	assert.equal(url.isEscaped(), false, "isEscaped() is false");
 });
 
 QUnit.test("isEscaped()", assert => {
+	assert.expect(1);
 	loc.search = "?_escaped_fragment_=test";
 	assert.equal(url.isEscaped(), true, "isEscaped() is true");
 });
 
 QUnit.test("isEscaped()", assert => {
+	assert.expect(1);
 	loc.search = "?test&_escaped_fragment_=";
 	assert.equal(url.isEscaped(), true, "isEscaped() is true");
 });
 
 QUnit.test("getEscapedSearch()", assert => {
+	assert.expect(1);
 	loc.search = "";
 	assert.equal(url.getEscapedSearch(), "?_escaped_fragment_=", "getEscapedSearch() is OK");
 });
 
 QUnit.test("getEscapedSearch()", assert => {
+	assert.expect(1);
 	const TEST_VALUE = 42;
 	loc.search = `?${TEST_VALUE}`;
 	assert.equal(url.getEscapedSearch(), `?${TEST_VALUE}&_escaped_fragment_=`, "getEscapedSearch() is OK");
 });
 
 QUnit.test("getHashBangEscapedSearch()", assert => {
+	assert.expect(1);
 	const TEST_VALUE = 42;
 	loc.hash = `#!${TEST_VALUE}`;
 	assert.equal(url.getHashBangEscapedSearch(), "?_escaped_fragment_=" + TEST_VALUE, "getHashBangEscapedSearch() is OK");
 });
 
 QUnit.test("getUnescaped()", assert => {
+	assert.expect(1);
 	const TEST_VALUE = 42;
 	loc.pathname = "";
 	loc.search = `?${TEST_VALUE}&_escaped_fragment_=`;
@@ -78,6 +88,7 @@ QUnit.test("getUnescaped()", assert => {
 });
 
 QUnit.test("setSearch()", assert => {
+	assert.expect(2);
 	const TEST_VALUE = "42";
 	loc.pathname = "";
 	loc.replace = path => {
@@ -87,6 +98,7 @@ QUnit.test("setSearch()", assert => {
 });
 
 QUnit.test("reset()", assert => {
+	assert.expect(2);
 	const TEST_VALUE = "42";
 	loc.pathname = TEST_VALUE;
 	loc.search = "?_escaped_fragment_=";
@@ -97,6 +109,7 @@ QUnit.test("reset()", assert => {
 });
 
 QUnit.test("reset()", assert => {
+	assert.expect(2);
 	const TEST_VALUE = "42";
 	const QUERY_PARAM = "?test";
 	loc.pathname = TEST_VALUE;

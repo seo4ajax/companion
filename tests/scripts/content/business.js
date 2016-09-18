@@ -23,6 +23,7 @@ QUnit.module("business", {
 });
 
 QUnit.test("init() - disabled", assert => {
+	assert.expect(4);
 	configuration.onChange = (listener) => {
 		assert.equal(typeof listener, "function", "configuration.onChange: listener is a function");
 	};
@@ -39,6 +40,7 @@ QUnit.test("init() - disabled", assert => {
 });
 
 QUnit.test("init() - enabled, regular path", assert => {
+	assert.expect(7);
 	const done = assert.async();
 	configuration.onChange = (listener) => {
 		assert.equal(typeof listener, "function", "configuration.onChange: listener is a function");
@@ -66,6 +68,7 @@ QUnit.test("init() - enabled, regular path", assert => {
 });
 
 QUnit.test("init() - enabled, escaped path", assert => {
+	assert.expect(7);
 	const TEST_VALUE = 42;
 	const done = assert.async();
 	configuration.onChange = (listener) => {

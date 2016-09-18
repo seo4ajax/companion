@@ -26,10 +26,12 @@ QUnit.module("business", {
 		url.getEscapedSearch = null;
 		url.setSearch = null;
 		win.addEventListener = null;
+		url.href = null;
 	}
 });
 
 QUnit.test("isEscaped()", assert => {
+	assert.expect(2);
 	url.isEscaped = () => {
 		assert.ok(true, "url.isEscaped method called");
 	};
@@ -39,13 +41,17 @@ QUnit.test("isEscaped()", assert => {
 });
 
 QUnit.test("getProbabilityEscapedOK()", assert => {
+	assert.expect(10);
+	const done = assert.async();
 	const TEST_VALUE = 0.42;
 	url.getUnescaped = () => {
-		assert.ok(true, "window.fetch method called");
+		assert.ok(true, "url.getUnescaped method called");
 		return "";
 	};
-	win.fetch = () => {
-		assert.ok(true, "window.fetch method called");
+	url.href = "";
+	win.fetch = (url, options) => {
+		assert.equal(typeof url, "string", "window.fetch: url is a string");
+		assert.equal(options.credentials, "include", "window.fetch: options.credentials is OK");
 		return Promise.resolve({
 			status: 200,
 			text: () => Promise.resolve("")
@@ -59,14 +65,17 @@ QUnit.test("getProbabilityEscapedOK()", assert => {
 		assert.ok(true, "minhash.similarity method called");
 		return TEST_VALUE;
 	};
+	webpage = app.webpage(win, doc, configuration, minhash, tokenizer, url);
 	const probabilityPromise = webpage.getProbabilityEscapedOK();
 	assert.equal(probabilityPromise instanceof Promise, true, "returned value is a Promise");
 	probabilityPromise.then(probability => {
 		assert.equal(probability, TEST_VALUE, "then: probability is OK");
+		done();
 	});
 });
 
 QUnit.test("resetURL()", assert => {
+	assert.expect(2);
 	url.reset = () => {
 		assert.ok(true, "url.reset method called");
 	};
@@ -76,6 +85,8 @@ QUnit.test("resetURL()", assert => {
 });
 
 QUnit.test("escapeURL()", assert => {
+	assert.expect(5);
+	const done = assert.async();
 	doc.head = {
 		querySelector: () => {
 			assert.ok(true, "document.querySelector method called");
@@ -92,12 +103,14 @@ QUnit.test("escapeURL()", assert => {
 	};
 	url.setSearch = () => {
 		assert.ok(true, "url.setSearch method called");
+		done();
 	};
 	const value = webpage.escapeURL();
 	assert.equal(value, undefined, "returned value is undefined");
 });
 
 QUnit.test("onHashBangChange(listener)", assert => {
+	assert.expect(3);
 	win.addEventListener = (type, listener) => {
 		assert.equal(type, "hashchange", "window.addEventListener: type is OK");
 		assert.equal(typeof listener, "function", "window.addEventListener: listener is a function");

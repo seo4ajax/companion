@@ -13,6 +13,7 @@ QUnit.module("welcome", {
 });
 
 QUnit.test("onInstalled(listener)", assert => {
+	assert.expect(2);
 	runtime.onInstalled = {
 		addListener: listener => {
 			assert.equal(typeof listener, "function", "runtime.onInstalled.addListener: listener is a function");

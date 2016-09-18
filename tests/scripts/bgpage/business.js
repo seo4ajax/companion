@@ -15,6 +15,8 @@ QUnit.module("business", {
 });
 
 QUnit.test("init()", assert => {
+	assert.expect(3);
+	const done = assert.async();
 	configuration.get = () => {
 		assert.ok(true, "configuration.get method called");
 		return Promise.resolve({});
@@ -22,6 +24,7 @@ QUnit.test("init()", assert => {
 	network.init = () => {
 		network.init = null;
 		assert.ok(true, "network.init method called");
+		done();
 	};
 	business = app.business(configuration, tabs, network);
 	const value = business.init();
@@ -29,6 +32,7 @@ QUnit.test("init()", assert => {
 });
 
 QUnit.test("getConfiguration()", assert => {
+	assert.expect(3);
 	const done = assert.async();
 	configuration.get = () => {
 		assert.ok(true, "configuration.get method called");
@@ -44,6 +48,7 @@ QUnit.test("getConfiguration()", assert => {
 });
 
 QUnit.test("toggleEnabled()", assert => {
+	assert.expect(5);
 	const done = assert.async();
 	configuration.get = () => {
 		assert.ok(true, "configuration.get method called");
@@ -68,6 +73,7 @@ QUnit.test("toggleEnabled()", assert => {
 });
 
 QUnit.test("onUpdate(listener)", assert => {
+	assert.expect(2);
 	tabs.onUpdate = listener => {
 		assert.equal(typeof listener, "function", "tabs.onUpdate: listener is a function");
 	};

@@ -20,6 +20,7 @@ QUnit.module("network", {
 });
 
 QUnit.test("setFiltering(true)", assert => {
+	assert.expect(4);
 	netfilters.enable = () => {
 		assert.ok(true, "netfilters.enable method called");
 	};
@@ -28,6 +29,7 @@ QUnit.test("setFiltering(true)", assert => {
 });
 
 QUnit.test("setFiltering(false)", assert => {
+	assert.expect(4);
 	netfilters.disable = () => {
 		assert.ok(true, "netfilters.disable method called");
 	};

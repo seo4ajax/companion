@@ -15,6 +15,7 @@ QUnit.module("tabs", {
 });
 
 QUnit.test("create(url)", assert => {
+	assert.expect(2);
 	chromeTabs.create = details => {
 		assert.equal(typeof details.url, "string", "tabs.create: details.url is a string");
 	};
@@ -23,6 +24,7 @@ QUnit.test("create(url)", assert => {
 });
 
 QUnit.test("onUpdate(listener)", assert => {
+	assert.expect(2);
 	runtime.onMessage = {
 		hasListeners: () => {
 			return false;

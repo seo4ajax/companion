@@ -15,6 +15,7 @@ QUnit.module("bgpage", {
 });
 
 QUnit.test("init()", assert => {
+	assert.expect(2);
 	const done = assert.async();
 	runtime.sendMessage = message => {
 		assert.equal(message.init, true, "runtime.sendMessage: message.init is true");
@@ -25,6 +26,7 @@ QUnit.test("init()", assert => {
 });
 
 QUnit.test("updateTab(probabilityEscapedOK)", assert => {
+	assert.expect(2);
 	const done = assert.async();
 	const TEST_VALUE = 42;
 	runtime.sendMessage = message => {
