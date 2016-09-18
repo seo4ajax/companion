@@ -1,4 +1,4 @@
-const app = { misc: {} };
+/* global app */
 
 app.configuration = storage => {
 

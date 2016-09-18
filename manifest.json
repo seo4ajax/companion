@@ -17,6 +17,7 @@
     },
     "background": {
         "scripts": [
+            "scripts/init.js",
             "scripts/configuration.js",
             "scripts/bgpage/misc/netfilters.js",
             "scripts/bgpage/tabs.js",
@@ -31,6 +32,7 @@
         {
             "all_frames": false,
             "js": [
+                "scripts/init.js",
                 "scripts/configuration.js",
                 "scripts/content/misc/minhash.js",
                 "scripts/content/misc/tokenizer.js",
