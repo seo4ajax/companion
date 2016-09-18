@@ -5,7 +5,7 @@
 	const SCRIPT_PATHS = [
 		["configuration.js"],
 		["bgpage/misc/netfilters.js", "bgpage/business.js", "bgpage/network.js", "bgpage/tabs.js", "bgpage/ui.js", "bgpage/welcome.js"],
-		["content/misc/minhash.js", "content/misc/tokenizer.js", "content/bgpage.js", "content/business.js", "content/url.js"]
+		["content/misc/minhash.js", "content/misc/tokenizer.js", "content/bgpage.js", "content/business.js", "content/url.js", "content/webpage.js"]
 	];
 	const SELECTED_CLASS = "selected";
 	const TEMPLATE_ID = "template-test-container";
