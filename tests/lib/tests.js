@@ -9,7 +9,7 @@
 	];
 	const SELECTED_CLASS = "selected";
 	const TEMPLATE_ID = "template-test-container";
-	const TEMPLATE_FILE_PATH = "/tests/lib/template.html";
+	const TEMPLATE_FILE_PATH = "/tests/ui/template.html";
 	const SCRIPTS_PATH = "/scripts";
 	const TESTS_PATH = "/tests/scripts";
 	const STYLESHEET_PATH = "/tests/vendor/qunit.css";
