@@ -22,7 +22,6 @@
 		document.body.querySelector("ul").appendChild(groupContainer);
 	});
 	refresh();
-	window.onload = initIests;
 	window.onhashchange = refresh;
 
 	function refresh() {
@@ -51,26 +50,34 @@
 
 	function appendIframe(parent, scriptPath) {
 		const iframe = document.createElement("iframe");
-		iframe.src = `${TEMPLATE_FILE_PATH}?${scriptPath}`;
+		iframe.src = TEMPLATE_FILE_PATH;
 		parent.appendChild(iframe);
+		iframe.onload = iframeOnload(iframe, scriptPath);
 	}
 
-	function initIests() {
-		Array.from(window.frames).forEach(iframe => {
-			const stylesheet = document.createElement("link");
-			const scriptPath = iframe.location.search.substring(1);
-			const testScript = document.createElement("script");
-			const script = document.createElement("script");
-			stylesheet.rel = "stylesheet";
-			stylesheet.href = STYLESHEET_PATH;
-			iframe.document.title = `${scriptPath}`;
-			script.async = testScript.async = false;
-			script.src = `${SCRIPTS_PATH}/${scriptPath}`;
-			testScript.src = `${TESTS_PATH}/${scriptPath}`;
-			iframe.document.head.appendChild(stylesheet);
-			iframe.document.body.appendChild(script);
-			iframe.document.body.appendChild(testScript);
-		});
+	function iframeOnload(iframe, scriptPath) {
+		return () => {
+			const doc = iframe.contentDocument;
+			doc.title = scriptPath;
+			appendStylesheet(doc.head, STYLESHEET_PATH);
+			const body = doc.body;
+			appendScript(body, `${SCRIPTS_PATH}/${scriptPath}`);
+			appendScript(body, `${TESTS_PATH}/${scriptPath}`);
+		};
+	}
+
+	function appendStylesheet(parent, path) {
+		const stylesheet = document.createElement("link");
+		stylesheet.rel = "stylesheet";
+		stylesheet.href = path;
+		parent.appendChild(stylesheet);
+	}
+
+	function appendScript(parent, path) {
+		const script = document.createElement("script");
+		script.async = false;
+		script.src = path;
+		parent.appendChild(script);
 	}
 
 })();
