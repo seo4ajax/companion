@@ -8,7 +8,6 @@ const USER_AGENT_CONFIG_KEY = "userAgent";
 const storage = {};
 let configuration;
 
-
 QUnit.module("configuration", {
 	beforeEach: () => {
 		configuration = app.configuration(storage);
