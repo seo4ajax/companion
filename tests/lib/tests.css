@@ -1,0 +1,43 @@
+#template-test-container {
+	display: none;
+}
+
+ul {
+	padding-left: 5px;
+	min-width: 800px;
+	border-bottom: #cccccc 2px solid;
+}
+
+li {
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.title {
+	display: inline-block;
+	background-color: #f3f3f3;
+	padding: 7px;
+	cursor: pointer;
+	text-decoration: none;
+	color: black;
+}
+
+iframe {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 140px);
+	top: 140px;
+	left: 0px;
+	border-width: 0px;
+	min-width: 800px;
+}
+
+li.selected .title {
+	background-color: #dedede;
+}
+
+li.selected iframe {
+	display: block;
+}

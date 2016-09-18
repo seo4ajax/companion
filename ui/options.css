@@ -81,3 +81,13 @@ footer {
 	margin-right: 50px;
 	text-align: right;
 }
+
+footer a {
+	display: block;	
+}
+
+footer a.test-link {
+	margin-top: 20px;
+	color: #d0d0d0;
+	text-decoration: none;
+}
