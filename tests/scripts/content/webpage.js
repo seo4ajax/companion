@@ -41,7 +41,7 @@ QUnit.test("isEscaped()", assert => {
 });
 
 QUnit.test("getProbabilityEscapedOK()", assert => {
-	assert.expect(10);
+	assert.expect(11);
 	const done = assert.async();
 	const TEST_VALUE = 0.42;
 	url.getUnescaped = () => {
@@ -57,12 +57,13 @@ QUnit.test("getProbabilityEscapedOK()", assert => {
 			text: () => Promise.resolve("")
 		});
 	};
-	tokenizer.getTokens = () => {
-		assert.ok(true, "tokenizer.getTokens method called");
-		return [];
+	tokenizer.getTokens = text => {
+		assert.equal(typeof text, "string", "tokenizer.getTokens: text is a string");
+		return new Set();
 	};
-	minhash.similarity = () => {
-		assert.ok(true, "minhash.similarity method called");
+	minhash.similarity = (set1, set2) => {
+		assert.ok(set1 instanceof Set, "minhash.similarity: set1 is a Set");
+		assert.ok(set2 instanceof Set, "minhash.similarity: set2 is a Set");
 		return TEST_VALUE;
 	};
 	webpage = app.webpage(win, doc, configuration, minhash, tokenizer, url);
@@ -86,10 +87,11 @@ QUnit.test("resetURL()", assert => {
 
 QUnit.test("escapeURL()", assert => {
 	assert.expect(5);
+	const TEST_VALUE = "42";
 	const done = assert.async();
 	doc.head = {
-		querySelector: () => {
-			assert.ok(true, "document.querySelector method called");
+		querySelector: selector => {
+			assert.equal(selector, "meta[name=fragment][content=\"!\"]", "document.querySelector: selector is OK");
 			return {};
 		}
 	};
@@ -99,10 +101,10 @@ QUnit.test("escapeURL()", assert => {
 	};
 	url.getEscapedSearch = () => {
 		assert.ok(true, "url.getEscapedSearch method called");
-		return Promise.resolve();
+		return Promise.resolve(TEST_VALUE);
 	};
-	url.setSearch = () => {
-		assert.ok(true, "url.setSearch method called");
+	url.setSearch = search => {
+		assert.equal(search, TEST_VALUE, "url.setSearch: search is OK");
 		done();
 	};
 	const value = webpage.escapeURL();
