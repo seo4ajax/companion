@@ -32,12 +32,14 @@ QUnit.module("business", {
 
 QUnit.test("isEscaped()", assert => {
 	assert.expect(2);
+	const TEST_VALUE = false;
 	url.isEscaped = () => {
 		assert.ok(true, "url.isEscaped method called");
+		return TEST_VALUE;
 	};
 	webpage = app.webpage(win, doc, configuration, minhash, tokenizer, url);
 	const value = webpage.isEscapedURL();
-	assert.equal(value, undefined, "returned value is undefined");
+	assert.equal(value, TEST_VALUE, "returned value is OK");
 });
 
 QUnit.test("getProbabilityEscapedOK()", assert => {
