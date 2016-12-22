@@ -8,6 +8,8 @@ app.network = (configuration, netfilters) => {
 	const SCRIPT_SRC_DIRECTIVE = "script-src";
 	const CSP_HEADER_VALUE = `${SCRIPT_SRC_DIRECTIVE} 'none',`;
 	const CSP_HEADER_REPLACE = new RegExp(`${SCRIPT_SRC_DIRECTIVE}[^,]*;`, "i");
+	const X_POWERED_BY_HEADER_NAME = "x-powered-by";
+	const X_POWERED_BY_HEADER_VALUE = "SEO4Ajax";
 	const URL_FILTER_PREFIX = "*://*/*";
 	const URL_FILTER_SUFFIX = "*";
 	const URLS_FILTER = [URL_FILTER_PREFIX + configuration.ESCAPED_FRAGMENT_FIRST_PARAM + URL_FILTER_SUFFIX, URL_FILTER_PREFIX + configuration.ESCAPED_FRAGMENT_LAST_PARAM + URL_FILTER_SUFFIX];
@@ -16,7 +18,8 @@ app.network = (configuration, netfilters) => {
 
 	return Object.freeze({
 		init,
-		setFiltering
+		enable,
+		onS4AHeader: netfilters.onS4AHeader
 	});
 
 	function init(config) {
@@ -26,7 +29,7 @@ app.network = (configuration, netfilters) => {
 		}
 	}
 
-	function setFiltering(enabled) {
+	function enable(enabled) {
 		if (enabled) {
 			netfilters.enable();
 		} else {
@@ -36,6 +39,10 @@ app.network = (configuration, netfilters) => {
 
 	function getRules(config) {
 		return {
+			s4aHeader: {
+				name: X_POWERED_BY_HEADER_NAME,
+				value: X_POWERED_BY_HEADER_VALUE
+			},
 			request: {
 				filter: REQUEST_FILTER,
 				headers: [{ name: REFERER_HEADER_NAME }, { name: USER_AGENT_HEADER_NAME, value: config.userAgent }]

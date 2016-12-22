@@ -32,7 +32,8 @@ app.business = (console, configuration, webpage, bgpage) => {
 
 	function enable() {
 		if (webpage.isEscapedURL()) {
-			webpage.getProbabilityEscapedOK()
+			bgpage.init();
+			webpage.getProbabilityEscapedKO()
 				.then(bgpage.updateTab)
 				.catch(console.error);
 		} else {

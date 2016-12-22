@@ -19,21 +19,21 @@ QUnit.module("network", {
 	}
 });
 
-QUnit.test("setFiltering(true)", assert => {
+QUnit.test("enable(true)", assert => {
 	assert.expect(4);
 	netfilters.enable = () => {
 		assert.ok(true, "netfilters.enable method called");
 	};
-	const value = network.setFiltering(true);
+	const value = network.enable(true);
 	assert.equal(value, undefined, "returned value is undefined");
 });
 
-QUnit.test("setFiltering(false)", assert => {
+QUnit.test("enable(false)", assert => {
 	assert.expect(4);
 	netfilters.disable = () => {
 		assert.ok(true, "netfilters.disable method called");
 	};
-	const value = network.setFiltering(false);
+	const value = network.enable(false);
 	assert.equal(value, undefined, "returned value is undefined");
 });
 

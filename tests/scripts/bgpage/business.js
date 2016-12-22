@@ -9,13 +9,13 @@ QUnit.module("business", {
 	afterEach: () => {
 		configuration.get = null;
 		configuration.set = null;
-		network.setFiltering = null;
+		network.enable = null;
 		tabs.onUpdate = null;
 	}
 });
 
 QUnit.test("init()", assert => {
-	assert.expect(3);
+	assert.expect(4);
 	const done = assert.async();
 	configuration.get = () => {
 		assert.ok(true, "configuration.get method called");
@@ -25,6 +25,9 @@ QUnit.test("init()", assert => {
 		network.init = null;
 		assert.ok(true, "network.init method called");
 		done();
+	};
+	network.onS4AHeader = () => {
+		assert.ok(true, "network.onS4AHeader method called");
 	};
 	business = app.business(configuration, tabs, network);
 	const value = business.init();
@@ -60,8 +63,8 @@ QUnit.test("toggleEnabled()", assert => {
 		assert.equal(config.enabled, true, "configuration.set: config.enabled is true");
 		return Promise.resolve(config);
 	};
-	network.setFiltering = enabled => {
-		assert.equal(enabled, true, "network.setFiltering: config.enabled is true");
+	network.enable = enabled => {
+		assert.equal(enabled, true, "network.enable: config.enabled is true");
 	};
 	business = app.business(configuration, tabs, network);
 	const value = business.toggleEnabled();

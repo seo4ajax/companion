@@ -15,22 +15,27 @@ QUnit.module("bgpage", {
 });
 
 QUnit.test("init()", assert => {
-	assert.expect(2);
+	assert.expect(3);
 	const done = assert.async();
 	runtime.sendMessage = message => {
 		assert.equal(message.init, true, "runtime.sendMessage: message.init is true");
 		done();
 	};
+	runtime.onMessage = { 
+		addListener: () => {
+			assert.ok(true, "runtime.onMessage.addListener method called");
+		}
+	};
 	const value = bgpage.init();
 	assert.equal(value, undefined, "returned value is undefined");
 });
 
-QUnit.test("updateTab(probabilityEscapedOK)", assert => {
+QUnit.test("updateTab(probabilityEscapedKO)", assert => {
 	assert.expect(2);
 	const done = assert.async();
 	const TEST_VALUE = 42;
 	runtime.sendMessage = message => {
-		assert.equal(message.probabilityEscapedOK, TEST_VALUE, "runtime.sendMessage: message.probabilityEscapedOK is OK");
+		assert.equal(message.probabilityEscapedKO, TEST_VALUE, "runtime.sendMessage: message.probabilityEscapedKO is OK");
 		done();
 	};
 	const value = bgpage.updateTab(TEST_VALUE);

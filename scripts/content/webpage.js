@@ -12,13 +12,13 @@ app.webpage = (window, document, configuration, minhash, tokenizer, url) => {
 
 	return Object.freeze({
 		isEscapedURL: url.isEscaped,
-		getProbabilityEscapedOK,
+		getProbabilityEscapedKO,
 		resetURL: url.reset,
 		escapeURL,
 		onHashBangChange
 	});
 
-	function getProbabilityEscapedOK() {
+	function getProbabilityEscapedKO() {
 		return Promise.all([getContentTokens(url.getUnescaped()), getContentTokens(url.href)])
 			.then(([unescapedContentTokens, contentTokens]) => minhash.similarity(unescapedContentTokens, contentTokens))
 			.catch(() => configuration.ERROR_SIMILARITY);

@@ -6,6 +6,7 @@ app.bgpage = (window, document, runtime) => {
 	const INIT_MESSAGE = { init: true };
 
 	const focusPromise = document.hasFocus() ? Promise.resolve() : new Promise(resolveOnFocus);
+	let s4aHeaderDetected;
 	return Object.freeze({
 		init,
 		updateTab
@@ -22,10 +23,15 @@ app.bgpage = (window, document, runtime) => {
 
 	function init() {
 		sendMessage(INIT_MESSAGE);
+		runtime.onMessage.addListener((message) => {
+			if (message.url == window.location.href && message.s4aHeaderDetected) {
+				s4aHeaderDetected = true;
+			}
+		});
 	}
 
-	function updateTab(probabilityEscapedOK) {
-		sendMessage({ probabilityEscapedOK });
+	function updateTab(probabilityEscapedKO) {
+		sendMessage({ probabilityEscapedKO: s4aHeaderDetected ? 0 : probabilityEscapedKO });
 	}
 
 	function sendMessage(message) {

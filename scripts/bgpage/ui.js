@@ -17,7 +17,7 @@ app.ui = (browserAction, configuration, tabs) => {
 	}
 
 	function refreshIcon(tabId, pageInfo) {
-		const slug = pageInfo && pageInfo.probabilityEscapedOK === undefined ? "" : configuration.ICON_PATH_SEPARATOR + getIconSlug(pageInfo.probabilityEscapedOK);
+		const slug = pageInfo && pageInfo.probabilityEscapedKO === undefined ? "" : configuration.ICON_PATH_SEPARATOR + getIconSlug(pageInfo.probabilityEscapedKO);
 		browserAction.setIcon({ path: configuration.ICON_PATH_PREFIX + slug + configuration.ICON_PATH_SUFFIX, tabId });
 	}
 
@@ -29,10 +29,10 @@ app.ui = (browserAction, configuration, tabs) => {
 		browserAction.onClicked.addListener(buttonClickListener);
 	}
 
-	function getIconSlug(probabilityEscapedOK) {
-		if (probabilityEscapedOK > configuration.ERROR_THRESHOLD) {
+	function getIconSlug(probabilityEscapedKO) {
+		if (probabilityEscapedKO > configuration.ERROR_THRESHOLD) {
 			return configuration.ICON_PATH_ERROR;
-		} else if (probabilityEscapedOK > configuration.WARNING_THRESHOLD || probabilityEscapedOK == configuration.ERROR_SIMILARITY) {
+		} else if (probabilityEscapedKO > configuration.WARNING_THRESHOLD || probabilityEscapedKO == configuration.ERROR_SIMILARITY) {
 			return configuration.ICON_PATH_WARNING;
 		} else {
 			return configuration.ICON_PATH_OK;

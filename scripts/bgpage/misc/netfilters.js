@@ -8,11 +8,12 @@ app.misc.netfilters = webRequest => {
 	const REQUEST_OPTIONS = [BLOCKING_OPTION, REQUEST_HEADERS_TYPE];
 	const RESPONSE_OPTIONS = [BLOCKING_OPTION, RESPONSE_HEADERS_TYPE];
 
-	let upsertRequestHeaders, upsertResponseHeaders, filterRules;
+	let upsertRequestHeaders, upsertResponseHeaders, filterRules, s4aHeaderListener;
 	return Object.freeze({
 		init,
 		enable,
-		disable
+		disable,
+		onS4AHeader
 	});
 
 	function init(rules) {
@@ -24,12 +25,26 @@ app.misc.netfilters = webRequest => {
 
 	function enable() {
 		webRequest.onBeforeSendHeaders.addListener(upsertRequestHeaders, filterRules.request.filter, REQUEST_OPTIONS);
+		webRequest.onHeadersReceived.addListener(detectS4AHeader, filterRules.response.filter, RESPONSE_OPTIONS);
 		webRequest.onHeadersReceived.addListener(upsertResponseHeaders, filterRules.response.filter, RESPONSE_OPTIONS);
 	}
 
 	function disable() {
 		webRequest.onBeforeSendHeaders.removeListener(upsertRequestHeaders);
 		webRequest.onHeadersReceived.removeListener(upsertResponseHeaders);
+	}
+
+	function onS4AHeader(listener) {
+		s4aHeaderListener = listener;
+	}
+
+	function detectS4AHeader(details) {
+		if (details.type == "xmlhttprequest") {
+			const s4aHeader = details.responseHeaders.find(header => equalsHeaderName(header, filterRules.s4aHeader) && header.value == filterRules.s4aHeader.value);
+			if (s4aHeader) {
+				s4aHeaderListener(details.tabId, details.url);
+			}
+		}
 	}
 
 	function updateHeaders(type, headers) {

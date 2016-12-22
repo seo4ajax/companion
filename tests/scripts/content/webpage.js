@@ -42,7 +42,7 @@ QUnit.test("isEscaped()", assert => {
 	assert.equal(value, TEST_VALUE, "returned value is OK");
 });
 
-QUnit.test("getProbabilityEscapedOK()", assert => {
+QUnit.test("getProbabilityEscapedKO()", assert => {
 	assert.expect(11);
 	const done = assert.async();
 	const TEST_VALUE = 0.42;
@@ -69,7 +69,7 @@ QUnit.test("getProbabilityEscapedOK()", assert => {
 		return TEST_VALUE;
 	};
 	webpage = app.webpage(win, doc, configuration, minhash, tokenizer, url);
-	const probabilityPromise = webpage.getProbabilityEscapedOK();
+	const probabilityPromise = webpage.getProbabilityEscapedKO();
 	assert.equal(probabilityPromise instanceof Promise, true, "returned value is a Promise");
 	probabilityPromise.then(probability => {
 		assert.equal(probability, TEST_VALUE, "then: probability is OK");

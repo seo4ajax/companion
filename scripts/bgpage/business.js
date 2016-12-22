@@ -10,6 +10,7 @@ app.business = (configuration, tabs, network) => {
 	});
 
 	function init() {
+		network.onS4AHeader(tabs.onS4AHeader);
 		return configuration.get().then(network.init);
 	}
 
@@ -26,7 +27,7 @@ app.business = (configuration, tabs, network) => {
 	}
 
 	function setNetworkFiltering(config) {
-		network.setFiltering(config.enabled);
+		network.enable(config.enabled);
 		return config;
 	}
 

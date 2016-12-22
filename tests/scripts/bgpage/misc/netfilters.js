@@ -27,7 +27,7 @@ QUnit.module("netfilters", {
 });
 
 QUnit.test("enable()", assert => {
-	assert.expect(8);
+	assert.expect(11);
 	webRequest.onBeforeSendHeaders = {
 		addListener: (listener, filter, options) => {
 			assert.equal(typeof listener, "function", "webRequest.onBeforeSendHeaders.addListener: listener is a function");

@@ -16,7 +16,7 @@ QUnit.module("business", {
 		webpage.onHashBangChange = null;
 		webpage.isEscapedURL = null;
 		webpage.escapeURL = null;
-		webpage.getProbabilityEscapedOK = null;
+		webpage.getProbabilityEscapedKO = null;
 		bgpage.init = null;
 		bgpage.updateTab = null;
 	}
@@ -68,7 +68,7 @@ QUnit.test("init() - enabled, regular path", assert => {
 });
 
 QUnit.test("init() - enabled, escaped path", assert => {
-	assert.expect(7);
+	assert.expect(8);
 	const TEST_VALUE = 42;
 	const done = assert.async();
 	configuration.onChange = (listener) => {
@@ -85,12 +85,15 @@ QUnit.test("init() - enabled, escaped path", assert => {
 		assert.ok(true, "webpage.isEscapedURL method called");
 		return true;
 	};
-	webpage.getProbabilityEscapedOK = () => {
-		assert.ok(true, "webpage.getProbabilityEscapedOK method called");
+	bgpage.init = () => {
+		assert.ok(true, "bgpage.init method called");
+	};
+	webpage.getProbabilityEscapedKO = () => {
+		assert.ok(true, "webpage.getProbabilityEscapedKO method called");
 		return Promise.resolve(TEST_VALUE);
 	};
-	bgpage.updateTab = (probabilityEscapedOK) => {
-		assert.equal(probabilityEscapedOK, TEST_VALUE, "probabilityEscapedOK is OK");
+	bgpage.updateTab = (probabilityEscapedKO) => {
+		assert.equal(probabilityEscapedKO, TEST_VALUE, "probabilityEscapedKO is OK");
 		done();
 	};
 	const value = business.init();
