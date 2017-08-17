@@ -40,7 +40,7 @@ QUnit.test("init() - disabled", assert => {
 });
 
 QUnit.test("init() - enabled, regular path", assert => {
-	assert.expect(7);
+	assert.expect(6);
 	const done = assert.async();
 	configuration.onChange = (listener) => {
 		assert.equal(typeof listener, "function", "configuration.onChange: listener is a function");
@@ -55,9 +55,6 @@ QUnit.test("init() - enabled, regular path", assert => {
 	webpage.isEscapedURL = () => {
 		assert.ok(true, "webpage.isEscapedURL method called");
 		return false;
-	};
-	bgpage.init = () => {
-		assert.ok(true, "bgpage.init method called");
 	};
 	webpage.escapeURL = () => {
 		assert.ok(true, "webpage.escapeURL method called");
