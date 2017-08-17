@@ -1,7 +1,7 @@
 {
     "name": "SEO4Ajax Companion",
     "description": "SEO4Ajax Companion allows testing the Google Ajax Scheme implementation directly in your browser",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "permissions": [
         "tabs",
         "storage",
