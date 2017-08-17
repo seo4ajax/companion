@@ -26,8 +26,8 @@ QUnit.test("init()", assert => {
 		assert.ok(true, "network.init method called");
 		done();
 	};
-	network.onS4AHeader = () => {
-		assert.ok(true, "network.onS4AHeader method called");
+	network.onS4AHeaderDetected = () => {
+		assert.ok(true, "network.onS4AHeaderDetected method called");
 	};
 	business = app.business(configuration, tabs, network);
 	const value = business.init();

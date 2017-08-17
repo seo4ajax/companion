@@ -5,15 +5,18 @@ app.misc.netfilters = webRequest => {
 	const BLOCKING_OPTION = "blocking";
 	const REQUEST_HEADERS_TYPE = "requestHeaders";
 	const RESPONSE_HEADERS_TYPE = "responseHeaders";
+	const REQUEST_XHR_TYPE = "xmlhttprequest";
+	const S4A_HEADER_KEY = "s4aHeader";
+	const VARY_HEADER_KEY = "varyHeader";
 	const REQUEST_OPTIONS = [BLOCKING_OPTION, REQUEST_HEADERS_TYPE];
 	const RESPONSE_OPTIONS = [BLOCKING_OPTION, RESPONSE_HEADERS_TYPE];
 
-	let upsertRequestHeaders, upsertResponseHeaders, filterRules, s4aHeaderListener;
+	let upsertRequestHeaders, upsertResponseHeaders, filterRules, detectS4AHeaderListener;
 	return Object.freeze({
 		init,
 		enable,
 		disable,
-		onS4AHeader
+		onS4AHeaderDetected
 	});
 
 	function init(rules) {
@@ -25,7 +28,7 @@ app.misc.netfilters = webRequest => {
 
 	function enable() {
 		webRequest.onBeforeSendHeaders.addListener(upsertRequestHeaders, filterRules.request.filter, REQUEST_OPTIONS);
-		webRequest.onHeadersReceived.addListener(detectS4AHeader, filterRules.response.filter, RESPONSE_OPTIONS);
+		webRequest.onHeadersReceived.addListener(detectS4AHeaders, filterRules.response.filter, RESPONSE_OPTIONS);
 		webRequest.onHeadersReceived.addListener(upsertResponseHeaders, filterRules.response.filter, RESPONSE_OPTIONS);
 	}
 
@@ -34,17 +37,18 @@ app.misc.netfilters = webRequest => {
 		webRequest.onHeadersReceived.removeListener(upsertResponseHeaders);
 	}
 
-	function onS4AHeader(listener) {
-		s4aHeaderListener = listener;
+	function onS4AHeaderDetected(listener) {
+		detectS4AHeaderListener = listener;
 	}
 
-	function detectS4AHeader(details) {
-		if (details.type == "xmlhttprequest") {
-			const s4aHeader = details.responseHeaders.find(header => equalsHeaderName(header, filterRules.s4aHeader) && header.value == filterRules.s4aHeader.value);
-			if (s4aHeader) {
-				s4aHeaderListener(details.tabId, details.url);
-			}
+	function detectS4AHeaders(details) {
+		if (details.type == REQUEST_XHR_TYPE && (testHeader(details, S4A_HEADER_KEY) || testHeader(details, VARY_HEADER_KEY))) {
+			detectS4AHeaderListener(details.tabId, details.url);
 		}
+	}
+
+	function testHeader(details, headerName) {
+		return details.responseHeaders.find(header => equalsHeaderName(header, filterRules[headerName]) && filterRules[headerName].value.test(header.value));
 	}
 
 	function updateHeaders(type, headers) {

@@ -9,7 +9,10 @@ app.network = (configuration, netfilters) => {
 	const CSP_HEADER_VALUE = `${SCRIPT_SRC_DIRECTIVE} 'none',`;
 	const CSP_HEADER_REPLACE = new RegExp(`${SCRIPT_SRC_DIRECTIVE}[^,]*;`, "i");
 	const X_POWERED_BY_HEADER_NAME = "x-powered-by";
-	const X_POWERED_BY_HEADER_VALUE = "SEO4Ajax";
+	const X_POWERED_BY_HEADER_VALUE = /SEO4Ajax/i;
+	const VARY_HEADER_NAME = "vary";
+	const VARY_HEADER_VALUE = /X-S4a-Debug/i;
+
 	const URL_FILTER_PREFIX = "*://*/*";
 	const URL_FILTER_SUFFIX = "*";
 	const URLS_FILTER = [URL_FILTER_PREFIX + configuration.ESCAPED_FRAGMENT_FIRST_PARAM + URL_FILTER_SUFFIX, URL_FILTER_PREFIX + configuration.ESCAPED_FRAGMENT_LAST_PARAM + URL_FILTER_SUFFIX];
@@ -19,7 +22,7 @@ app.network = (configuration, netfilters) => {
 	return Object.freeze({
 		init,
 		enable,
-		onS4AHeader: netfilters.onS4AHeader
+		onS4AHeaderDetected: netfilters.onS4AHeaderDetected
 	});
 
 	function init(config) {
@@ -42,6 +45,10 @@ app.network = (configuration, netfilters) => {
 			s4aHeader: {
 				name: X_POWERED_BY_HEADER_NAME,
 				value: X_POWERED_BY_HEADER_VALUE
+			},
+			varyHeader: {
+				name: VARY_HEADER_NAME,
+				value: VARY_HEADER_VALUE
 			},
 			request: {
 				filter: REQUEST_FILTER,

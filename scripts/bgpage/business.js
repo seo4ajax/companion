@@ -10,7 +10,7 @@ app.business = (configuration, tabs, network) => {
 	});
 
 	function init() {
-		network.onS4AHeader(tabs.onS4AHeader);
+		network.onS4AHeaderDetected(tabs.onS4AHeaderDetected);
 		return configuration.get().then(network.init);
 	}
 
