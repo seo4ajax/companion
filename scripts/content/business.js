@@ -37,7 +37,6 @@ app.business = (console, configuration, webpage, bgpage) => {
 				.then(bgpage.updateTab)
 				.catch(console.error);
 		} else {
-			bgpage.init();
 			webpage.escapeURL();
 		}
 	}
