@@ -5,7 +5,7 @@ app.tabs = (tabs, runtime) => {
 	return Object.freeze({
 		create,
 		onUpdate,
-		onS4AHeaderDetected
+		notifyS4AHeaderDetected
 	});
 
 	function create(url) {
@@ -18,7 +18,7 @@ app.tabs = (tabs, runtime) => {
 		}
 	}
 
-	function onS4AHeaderDetected(tabId, url) {
+	function notifyS4AHeaderDetected(tabId, url) {
 		tabs.sendMessage(tabId, { url, s4aHeaderDetected: true });
 	}
 
