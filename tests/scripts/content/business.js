@@ -65,7 +65,7 @@ QUnit.test("init() - enabled, regular path", assert => {
 });
 
 QUnit.test("init() - enabled, escaped path", assert => {
-	assert.expect(8);
+	assert.expect(9);
 	const TEST_VALUE = 42;
 	const done = assert.async();
 	configuration.onChange = (listener) => {
@@ -88,6 +88,10 @@ QUnit.test("init() - enabled, escaped path", assert => {
 	webpage.getProbabilityEscapedKO = () => {
 		assert.ok(true, "webpage.getProbabilityEscapedKO method called");
 		return Promise.resolve(TEST_VALUE);
+	};
+	webpage.getCaptureInfo = () => {
+		assert.ok(true, "webpage.getCaptureInfo method called");
+		return Promise.resolve({});
 	};
 	bgpage.updateTab = (probabilityEscapedKO) => {
 		assert.equal(probabilityEscapedKO, TEST_VALUE, "probabilityEscapedKO is OK");

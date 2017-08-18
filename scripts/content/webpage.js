@@ -15,6 +15,7 @@ app.webpage = (window, document, configuration, minhash, tokenizer, url) => {
 		getProbabilityEscapedKO,
 		resetURL: url.reset,
 		escapeURL,
+		getCaptureInfo,
 		onHashBangChange
 	});
 
@@ -82,6 +83,18 @@ app.webpage = (window, document, configuration, minhash, tokenizer, url) => {
 
 	function findMetaFragment(nodes) {
 		return Array.from(nodes).find(node => node.matches && node.matches(META_FRAGMENT_SELECTOR));
+	}
+
+	function getCaptureInfo() {
+		const descriptionNode = document.querySelector("meta[name=description]");
+		const canonicalNode = document.querySelector("link[rel=canonical]");
+		const robotsNode = document.querySelector("meta[name=robots]");
+		return Promise.resolve({
+			title: document.title,
+			description: descriptionNode ? descriptionNode.getAttribute("content") : "",
+			canonical: canonicalNode ? canonicalNode.getAttribute("href") : "",
+			robots: robotsNode ? robotsNode.getAttribute("content") : ""
+		});
 	}
 
 };

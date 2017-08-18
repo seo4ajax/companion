@@ -123,4 +123,16 @@ QUnit.test("onHashBangChange(listener)", assert => {
 	assert.equal(value, undefined, "returned value is undefined");
 });
 
+QUnit.test("getCaptureInfo", assert => {
+	assert.expect(4);
+	doc.querySelector = selector => {
+		assert.ok(selector == "meta[name=description]" || selector == "link[rel=canonical]" || selector == "meta[name=robots]");
+		return {
+			getAttribute: () => ""
+		};
+	};
+	const value = webpage.getCaptureInfo();
+	assert.equal(typeof value, "object", "returned value is an object");
+});
+
 QUnit.start();
